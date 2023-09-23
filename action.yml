@@ -1,0 +1,50 @@
+name: 'jacoco-code-coverage-report'
+description: 'This action reads jacoco coverage report and create output that can be used print in logs or teams notification'
+author: 'Sandeep Thakurala'
+
+# Define your inputs here.
+inputs:
+  path:
+    description: 'Path of jacoco csv file.'
+    required: true
+
+# Define your outputs here.
+outputs:
+  class:
+    description: 'Count of classes check for coverage.'
+  instruction_count:
+    description: 'Instructions count.'
+  instruction_covered:
+    description: 'Instructions covered.'
+  instruction_coverage:
+    description: 'Percent of instructions covered.'
+  branch_count:
+    description: 'Branch count.'
+  branch_covered:
+    description: 'Instructions covered.'
+  branch_coverage:
+    description: 'Percent of branch covered.'
+  lines_count:
+    description: 'Lines count.'
+  lines_covered:
+    description: 'Lines covered.'
+  lines_coverage:
+    description: 'Percent of lines covered.'
+  complexity_count:
+    description: 'Complexity count.'
+  complexity_covered:
+    description: 'Complexity covered.'
+  complexity_coverage:
+    description: 'Percent of complexity covered.'
+  method_count:
+    description: 'Methods count.'
+  mothed_covered:
+    description: 'Methods covered.'
+  mothed_coverage:
+    description: 'Percent of methods covered.'
+
+
+
+runs:
+  using: node20
+  main: dist/index.js
