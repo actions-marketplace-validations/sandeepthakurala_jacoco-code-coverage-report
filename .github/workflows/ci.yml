@@ -54,7 +54,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          path: target/site/jacoco/jacoco.csv
+          path: resources/jacoco.csv
 
       - name: Print Output
         id: output
