@@ -3086,26 +3086,39 @@ exports.calculateAllCoverages = void 0;
 const core = __importStar(__nccwpck_require__(186));
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(icoverages) {
-    var coverages = [];
+    //Set instructions coverages to outputs.
     (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION').then(value => {
         core.setOutput('instruction_count', value.count);
         core.setOutput('instruction_covered', value.covered);
         core.setOutput('instruction_coverage', value.percent);
     });
-    let branchCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH');
-    let lineCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE');
-    let complexityCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'COMPLEXITY');
-    let methodCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD');
-    const printValue = async () => {
-        coverages.push(await branchCov);
-        coverages.push(await lineCov);
-        coverages.push(await complexityCov);
-        coverages.push(await methodCov);
-        console.log('*************');
-        for (let cov of coverages) {
-            console.log(cov);
-        }
-    };
+    //Set branch coverages to outputs.
+    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH').then(value => {
+        core.setOutput('branch_count', value.count);
+        core.setOutput('branch_covered', value.covered);
+        core.setOutput('branch_coverage', value.percent);
+    });
+    //Set line coverages to outputs.
+    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE').then(value => {
+        core.setOutput('lines_count', value.count);
+        core.setOutput('lines_covered', value.covered);
+        core.setOutput('lines_coverage', value.percent);
+    });
+    //Set complexity coverages to outputs.
+    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'COMPLEXITY').then(value => {
+        core.setOutput('complexity_count', value.count);
+        core.setOutput('complexity_covered', value.covered);
+        core.setOutput('complexity_coverage', value.percent);
+    });
+    //Set method coverages to outputs.
+    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD').then(value => {
+        core.setOutput('method_count', value.count);
+        core.setOutput('method_covered', value.covered);
+        core.setOutput('method_coverage', value.percent);
+    });
+    icoverages.then(values => {
+        core.setOutput('class_count', values.length);
+    });
 }
 exports.calculateAllCoverages = calculateAllCoverages;
 

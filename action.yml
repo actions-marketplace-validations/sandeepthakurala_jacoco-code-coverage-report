@@ -10,7 +10,7 @@ inputs:
 
 # Define your outputs here.
 outputs:
-  class:
+  class_count:
     description: 'Count of classes check for coverage.'
   instruction_count:
     description: 'Instructions count.'
@@ -38,9 +38,9 @@ outputs:
     description: 'Percent of complexity covered.'
   method_count:
     description: 'Methods count.'
-  mothed_covered:
+  method_covered:
     description: 'Methods covered.'
-  mothed_coverage:
+  method_coverage:
     description: 'Percent of methods covered.'
 
 
