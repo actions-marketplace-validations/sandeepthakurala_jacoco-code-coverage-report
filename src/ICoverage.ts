@@ -1,4 +1,4 @@
-export interface CoverageObject {
+export interface ICoverage {
   GROUP: string
   PACKAGE: string
   CLASS: string

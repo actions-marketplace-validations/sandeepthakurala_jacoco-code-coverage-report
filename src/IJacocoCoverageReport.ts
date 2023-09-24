@@ -1,4 +1,4 @@
-export interface JacocoCoverageReport {
+export interface IJacocoCoverageReport {
   name: string
   count: number
   covered: number
