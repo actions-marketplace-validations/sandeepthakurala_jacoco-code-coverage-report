@@ -1,17 +1,17 @@
-import { IJacocoCoverageReport } from './IJacocoCoverageReport'
-import { ICoverage } from './ICoverage'
-import { calculatePercentage } from './CalculatePercentage'
+import { IJacocoCoverageReport } from './iJacocoCoverageReport'
+import { ICoverage } from './iCoverage'
+import { calculatePercentage } from './calculatePercentage'
 
-export function calculateCoverage(
+export async function calculateCoverage(
   coverages: Promise<object[]>,
   coveragePropertyName: string
 ): Promise<IJacocoCoverageReport> {
   return coverages.then(value => {
-    var instructionsCovered = 0
-    var instructionsMissed = 0
+    let instructionsCovered = 0
+    let instructionsMissed = 0
 
     for (let c of value) {
-      var cov = c as ICoverage
+      let cov = c as ICoverage
 
       type CoverageObjectKey = keyof typeof cov
       let missedKey = (coveragePropertyName + '_MISSED') as CoverageObjectKey
@@ -21,7 +21,7 @@ export function calculateCoverage(
       instructionsCovered = instructionsCovered + Number(cov[coveredKey])
     }
 
-    var instructionsCoverageReport = {} as IJacocoCoverageReport
+    let instructionsCoverageReport = {} as IJacocoCoverageReport
     instructionsCoverageReport.name = coveragePropertyName
     instructionsCoverageReport.count = instructionsMissed + instructionsCovered
     instructionsCoverageReport.covered = instructionsCovered
