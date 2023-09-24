@@ -33,15 +33,16 @@ export async function calculateCoverage(
 
 function calculateInstructionsCoverage(coverages: Promise<object[]>) {
   coverages.then(value => {
-    let key1 = 'INSTRUCTION_MISSED'
     var instructionsCovered = 0
     var instructionsMissed = 0
     var instructionsCount = 0
 
     for (let c of value) {
-      var cov: CoverageObject = c as CoverageObject
-      instructionsMissed += cov.INSTRUCTION_MISSED
-      instructionsCovered += cov.INSTRUCTION_COVERED
+      var cov = c as CoverageObject
+      instructionsMissed =
+        Number(instructionsMissed) + Number(cov.INSTRUCTION_MISSED)
+      instructionsCovered =
+        Number(instructionsCovered) + Number(cov.INSTRUCTION_COVERED)
       console.log(cov.INSTRUCTION_MISSED)
       console.log(cov.INSTRUCTION_COVERED)
     }
