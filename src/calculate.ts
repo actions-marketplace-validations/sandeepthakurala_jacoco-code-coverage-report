@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { calculateCoverage } from './calculateCoverageFor'
+import { calculateCoverage } from './calculatecoveragefor'
 
 export function calculateAllCoverages(icoverages: Promise<object[]>): void {
   //Set instructions coverages to outputs.
