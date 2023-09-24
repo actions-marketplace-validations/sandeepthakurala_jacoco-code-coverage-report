@@ -2,42 +2,38 @@ import * as core from '@actions/core'
 import { calculateCoverage } from './calculatecoveragefor'
 
 export function calculateAllCoverages(icoverages: Promise<object[]>): void {
-  //Set instructions coverages to outputs.
-  calculateCoverage(icoverages, 'INSTRUCTION').then(value => {
-    core.setOutput('instruction_count', value.count)
-    core.setOutput('instruction_covered', value.covered)
-    core.setOutput('instruction_coverage', value.percent)
-  })
 
-  //Set branch coverages to outputs.
-  calculateCoverage(icoverages, 'BRANCH').then(value => {
-    core.setOutput('branch_count', value.count)
-    core.setOutput('branch_covered', value.covered)
-    core.setOutput('branch_coverage', value.percent)
-  })
+    const setCoverageValuesToOutput = async () => {
+      const instructionCov = await calculateCoverage(icoverages, 'INSTRUCTION');
+      core.setOutput('instruction_count', instructionCov.count)
+      core.setOutput('instruction_covered', instructionCov.covered)
+      core.setOutput('instruction_coverage', instructionCov.percent)
 
-  //Set line coverages to outputs.
-  calculateCoverage(icoverages, 'LINE').then(value => {
-    core.setOutput('lines_count', value.count)
-    core.setOutput('lines_covered', value.covered)
-    core.setOutput('lines_coverage', value.percent)
-  })
+      const branchCov = await calculateCoverage(icoverages, 'BRANCH');
+      core.setOutput('branch_count', branchCov.count)
+      core.setOutput('branch_covered', branchCov.covered)
+      core.setOutput('branch_coverage', branchCov.percent)
 
-  //Set complexity coverages to outputs.
-  calculateCoverage(icoverages, 'COMPLEXITY').then(value => {
-    core.setOutput('complexity_count', value.count)
-    core.setOutput('complexity_covered', value.covered)
-    core.setOutput('complexity_coverage', value.percent)
-  })
+      const lineCov = await calculateCoverage(icoverages, 'LINE');
+      core.setOutput('lines_count', lineCov.count)
+      core.setOutput('lines_covered', lineCov.covered)
+      core.setOutput('lines_coverage', lineCov.percent)
 
-  //Set method coverages to outputs.
-  calculateCoverage(icoverages, 'METHOD').then(value => {
-    core.setOutput('method_count', value.count)
-    core.setOutput('method_covered', value.covered)
-    core.setOutput('method_coverage', value.percent)
-  })
 
-  icoverages.then(values => {
-    core.setOutput('class_count', values.length)
-  })
+      const complexity = await calculateCoverage(icoverages, 'COMPLEXITY');
+      core.setOutput('complexity_count', complexity.count)
+      core.setOutput('complexity_covered', complexity.covered)
+      core.setOutput('complexity_coverage', complexity.percent)
+
+      const method = await calculateCoverage(icoverages, 'METHOD');
+      core.setOutput('method_count', method.count)
+      core.setOutput('method_covered', method.covered)
+      core.setOutput('method_coverage', method.percent)
+
+       await icoverages.then(values => {
+        core.setOutput('class_count', values.length)
+      });
+    }
+
+    setCoverageValuesToOutput();
 }
