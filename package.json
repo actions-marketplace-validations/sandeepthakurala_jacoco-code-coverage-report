@@ -1,7 +1,7 @@
 {
   "name": "jacoco-code-coverage-report",
   "description": "GitHub Actions for processing jacoco coverage report",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "Sandeep Thakurala",
   "private": true,
   "homepage": "https://git.t3.daimlertruck.com/santhak/jacoco-code-coverage-report",
