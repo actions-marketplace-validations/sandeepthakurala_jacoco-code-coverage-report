@@ -3145,9 +3145,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
+const fs_1 = __importDefault(__nccwpck_require__(147));
 const readjacocoreport_1 = __nccwpck_require__(258);
 const calculate_1 = __nccwpck_require__(482);
 /**
@@ -3157,6 +3161,9 @@ const calculate_1 = __nccwpck_require__(482);
 async function run() {
     try {
         const csvFilePath = core.getInput('path');
+        if (!fs_1.default.existsSync(csvFilePath)) {
+            core.setFailed(`${csvFilePath} does not exists.`);
+        }
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
         const records = (0, readjacocoreport_1.readCSVFile)(csvFilePath);
         (0, calculate_1.calculateAllCoverages)(records);

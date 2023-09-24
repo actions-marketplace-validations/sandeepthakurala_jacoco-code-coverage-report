@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import fs from 'fs'
 import { readCSVFile } from './readjacocoreport'
 import { calculateAllCoverages } from './calculate'
 
@@ -9,6 +10,10 @@ import { calculateAllCoverages } from './calculate'
 export async function run(): Promise<void> {
   try {
     const csvFilePath: string = core.getInput('path')
+
+    if (!fs.existsSync(csvFilePath)) {
+      core.setFailed(`${csvFilePath} does not exists.`)
+    }
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     const records = readCSVFile(csvFilePath)
