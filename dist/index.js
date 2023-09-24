@@ -3063,23 +3063,24 @@ exports.calculateAllCoverages = void 0;
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(icoverages) {
     var coverages = [];
-    let val = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION');
-    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH').then(value => {
-        console.log('******');
-        console.log(value);
-        return value;
-    });
-    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE').then(value => {
-        coverages.push(value);
-    });
-    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'COMPLEXITY').then(value => {
-        coverages.push(value);
-    });
-    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD').then(value => {
-        coverages.push(value);
-    });
-    console.log('#####');
-    console.log(val);
+    let instructCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION');
+    let branchCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH');
+    let lineCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE');
+    let complexityCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'COMPLEXITY');
+    let methodCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD');
+    const printValue = async () => {
+        coverages.push(await instructCov);
+        coverages.push(await branchCov);
+        coverages.push(await lineCov);
+        coverages.push(await complexityCov);
+        coverages.push(await methodCov);
+        console.log('*************');
+        for (let cov of coverages) {
+            console.log(cov);
+        }
+    };
+    console.log('printValue*************printValue');
+    printValue();
 }
 exports.calculateAllCoverages = calculateAllCoverages;
 

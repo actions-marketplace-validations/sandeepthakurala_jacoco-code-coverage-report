@@ -4,25 +4,26 @@ import { IJacocoCoverageReport } from './IJacocoCoverageReport'
 export function calculateAllCoverages(icoverages: Promise<object[]>) {
   var coverages: Array<IJacocoCoverageReport> = []
 
-  let val = calculateCoverage(icoverages, 'INSTRUCTION')
-  calculateCoverage(icoverages, 'BRANCH').then(value => {
-    console.log('******')
-    console.log(value)
-    return value
-  })
+  let instructCov = calculateCoverage(icoverages, 'INSTRUCTION')
+  let branchCov = calculateCoverage(icoverages, 'BRANCH')
+  let lineCov = calculateCoverage(icoverages, 'LINE')
+  let complexityCov = calculateCoverage(icoverages, 'COMPLEXITY')
+  let methodCov = calculateCoverage(icoverages, 'METHOD')
 
-  calculateCoverage(icoverages, 'LINE').then(value => {
-    coverages.push(value)
-  })
+  const printValue = async () => {
+    coverages.push(await instructCov)
+    coverages.push(await branchCov)
+    coverages.push(await lineCov)
+    coverages.push(await complexityCov)
+    coverages.push(await methodCov)
 
-  calculateCoverage(icoverages, 'COMPLEXITY').then(value => {
-    coverages.push(value)
-  })
+    console.log('*************')
+    for (let cov of coverages) {
+      console.log(cov)
+    }
+  }
 
-  calculateCoverage(icoverages, 'METHOD').then(value => {
-    coverages.push(value)
-  })
+  console.log('printValue*************printValue')
 
-  console.log('#####')
-  console.log(val)
+  printValue()
 }
