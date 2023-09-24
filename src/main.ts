@@ -10,7 +10,7 @@ export async function run(): Promise<void> {
     const csvFilePath: string = core.getInput('path')
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    //const records = readCSVFile(csvFilePath)
+    const records = readCSVFile(csvFilePath)
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
