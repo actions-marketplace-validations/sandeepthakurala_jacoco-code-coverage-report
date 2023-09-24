@@ -1,5 +1,7 @@
 name: 'jacoco-code-coverage-report'
-description: 'This action reads jacoco coverage report and create output that can be used print in logs or teams notification'
+description:
+  'This action reads jacoco coverage report and create output that can be used
+  print in logs or teams notification'
 author: 'Sandeep Thakurala'
 
 # Define your inputs here.
@@ -42,8 +44,6 @@ outputs:
     description: 'Methods covered.'
   method_coverage:
     description: 'Percent of methods covered.'
-
-
 
 runs:
   using: node20

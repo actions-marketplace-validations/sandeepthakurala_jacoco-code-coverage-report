@@ -15,7 +15,8 @@ export async function calculateCoverage(
 
       type CoverageObjectKey = keyof typeof cov
       const missedKey = (coveragePropertyName + '_MISSED') as CoverageObjectKey
-      const coveredKey = (coveragePropertyName + '_COVERED') as CoverageObjectKey
+      const coveredKey = (coveragePropertyName +
+        '_COVERED') as CoverageObjectKey
 
       instructionsMissed = instructionsMissed + Number(cov[missedKey])
       instructionsCovered = instructionsCovered + Number(cov[coveredKey])
