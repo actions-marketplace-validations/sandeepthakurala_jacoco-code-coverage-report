@@ -10,6 +10,8 @@ export async function calculateCoverage(
 ): Promise<JacocoCoverageReport[]> {
   const results: JacocoCoverageReport[] = []
 
+  calculateInstructionsCoverage(coverages)
+
   return new Promise((resolve, reject) => {})
 }
 

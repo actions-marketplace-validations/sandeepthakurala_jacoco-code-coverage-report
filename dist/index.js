@@ -3013,6 +3013,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateCoverage = void 0;
 async function calculateCoverage(coverages) {
     const results = [];
+    calculateInstructionsCoverage(coverages);
     return new Promise((resolve, reject) => { });
 }
 exports.calculateCoverage = calculateCoverage;
