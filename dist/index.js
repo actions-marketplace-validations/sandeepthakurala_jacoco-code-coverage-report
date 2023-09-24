@@ -3018,14 +3018,29 @@ async function calculateCoverage(coverages) {
 }
 exports.calculateCoverage = calculateCoverage;
 function calculateInstructionsCoverage(coverages) {
-    var instructionsCovered;
-    var instructionsMissed;
-    var instructionsCount;
     coverages.then(value => {
-        for (let cov of value) {
-            console.log(cov);
+        let key1 = 'INSTRUCTION_MISSED';
+        var instructionsCovered = 0;
+        var instructionsMissed = 0;
+        var instructionsCount = 0;
+        for (let c of value) {
+            var cov = c;
+            instructionsMissed += cov.INSTRUCTION_MISSED;
+            instructionsCovered += cov.INSTRUCTION_COVERED;
+            console.log(cov.INSTRUCTION_MISSED);
+            console.log(cov.INSTRUCTION_COVERED);
         }
+        instructionsCount = instructionsMissed + instructionsCovered;
+        console.log('****************************************');
+        console.log(instructionsMissed);
+        console.log(instructionsCovered);
+        console.log(instructionsCount);
+        console.log(calculatePercentage(instructionsCovered, instructionsCount));
+        console.log('****************************************');
     });
+}
+function calculatePercentage(amount, total) {
+    return (amount / total) * 100;
 }
 
 
