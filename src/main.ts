@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import { readCSVFile } from './readJacocoReport'
+import { calculateCoverage } from './calculate'
 
 /**
  * The main function for the action.
@@ -11,6 +12,7 @@ export async function run(): Promise<void> {
 
     // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
     const records = readCSVFile(csvFilePath)
+    calculateCoverage(records)
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)

@@ -5,8 +5,22 @@ interface JacocoCoverageReport {
   missed: number
 }
 
-export async function readCSVFile(coverages: object[]): Promise<object[]> {
-  const results: object[] = []
+export async function calculateCoverage(
+  coverages: Promise<object[]>
+): Promise<JacocoCoverageReport[]> {
+  const results: JacocoCoverageReport[] = []
 
   return new Promise((resolve, reject) => {})
+}
+
+function calculateInstructionsCoverage(coverages: Promise<object[]>) {
+  var instructionsCovered
+  var instructionsMissed
+  var instructionsCount
+
+  coverages.then(value => {
+    for (let cov of value) {
+      console.log(cov)
+    }
+  })
 }

@@ -3004,6 +3004,32 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ 482:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.calculateCoverage = void 0;
+async function calculateCoverage(coverages) {
+    const results = [];
+    return new Promise((resolve, reject) => { });
+}
+exports.calculateCoverage = calculateCoverage;
+function calculateInstructionsCoverage(coverages) {
+    var instructionsCovered;
+    var instructionsMissed;
+    var instructionsCount;
+    coverages.then(value => {
+        for (let cov of value) {
+            console.log(cov);
+        }
+    });
+}
+
+
+/***/ }),
+
 /***/ 399:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -3036,6 +3062,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
 const readJacocoReport_1 = __nccwpck_require__(505);
+const calculate_1 = __nccwpck_require__(482);
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -3045,6 +3072,7 @@ async function run() {
         const csvFilePath = core.getInput('path');
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
         const records = (0, readJacocoReport_1.readCSVFile)(csvFilePath);
+        (0, calculate_1.calculateCoverage)(records);
     }
     catch (error) {
         // Fail the workflow run if an error occurs
