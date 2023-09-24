@@ -3102,11 +3102,7 @@ async function readCSVFile(filePath) {
     return new Promise((resolve, reject) => {
         fs_1.default.createReadStream(filePath)
             .pipe((0, csv_parser_1.default)())
-            .on('data', function (row) {
-            console.log(row);
-            console.log(row.INSTRUCTION_MISSED);
-            console.log(row.INSTRUCTION_COVERED);
-        })
+            .on('data', data => results.push(data))
             .on('end', () => resolve(results))
             .on('error', error => reject(error));
     });
