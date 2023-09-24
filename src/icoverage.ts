@@ -1,4 +1,4 @@
-export interface Icoverage {
+export interface ICoverage {
   GROUP: string
   PACKAGE: string
   CLASS: string

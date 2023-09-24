@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import { calculateCoverage } from './calculatecoveragefor'
 
 export function calculateAllCoverages(icoverages: Promise<object[]>): void {
-  const setCoverageValuesToOutput = async () => {
+  const setCoverageValuesToOutput = async (): Promise<void> => {
     const instructionCov = await calculateCoverage(icoverages, 'INSTRUCTION')
     core.setOutput('instruction_count', instructionCov.count)
     core.setOutput('instruction_covered', instructionCov.covered)
@@ -28,9 +28,10 @@ export function calculateAllCoverages(icoverages: Promise<object[]>): void {
     core.setOutput('method_covered', method.covered)
     core.setOutput('method_coverage', method.percent)
 
-    await icoverages.then(values => {
-      core.setOutput('class_count', values.length)
-    })
+    const obj = await icoverages
+
+    core.setOutput('class_count', obj.length)
+    console.log(obj.length)
   }
 
   setCoverageValuesToOutput()

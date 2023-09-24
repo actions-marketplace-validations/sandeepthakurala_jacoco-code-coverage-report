@@ -3058,9 +3058,9 @@ function calculateAllCoverages(icoverages) {
         core.setOutput('method_count', method.count);
         core.setOutput('method_covered', method.covered);
         core.setOutput('method_coverage', method.percent);
-        await icoverages.then(values => {
-            core.setOutput('class_count', values.length);
-        });
+        const obj = await icoverages;
+        core.setOutput('class_count', obj.length);
+        console.log(obj.length);
     };
     setCoverageValuesToOutput();
 }
@@ -3078,25 +3078,23 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateCoverage = void 0;
 const calculatepercentage_1 = __nccwpck_require__(591);
 async function calculateCoverage(coverages, coveragePropertyName) {
-    return coverages.then(value => {
-        let instructionsCovered = 0;
-        let instructionsMissed = 0;
-        for (const c of value) {
-            const cov = c;
-            const missedKey = (coveragePropertyName + '_MISSED');
-            const coveredKey = (coveragePropertyName +
-                '_COVERED');
-            instructionsMissed = instructionsMissed + Number(cov[missedKey]);
-            instructionsCovered = instructionsCovered + Number(cov[coveredKey]);
-        }
-        const instructionsCoverageReport = {};
-        instructionsCoverageReport.name = coveragePropertyName;
-        instructionsCoverageReport.count = instructionsMissed + instructionsCovered;
-        instructionsCoverageReport.covered = instructionsCovered;
-        instructionsCoverageReport.missed = instructionsMissed;
-        instructionsCoverageReport.percent = (0, calculatepercentage_1.calculatepercentage)(instructionsCovered, instructionsMissed + instructionsCovered);
-        return instructionsCoverageReport;
-    });
+    const obj = await coverages;
+    let instructionsCovered = 0;
+    let instructionsMissed = 0;
+    for (const c of obj) {
+        const cov = c;
+        const missedKey = `${coveragePropertyName}_MISSED`;
+        const coveredKey = `${coveragePropertyName}_COVERED`;
+        instructionsMissed = instructionsMissed + Number(cov[missedKey]);
+        instructionsCovered = instructionsCovered + Number(cov[coveredKey]);
+    }
+    const instructionsCoverageReport = {};
+    instructionsCoverageReport.name = coveragePropertyName;
+    instructionsCoverageReport.count = instructionsMissed + instructionsCovered;
+    instructionsCoverageReport.covered = instructionsCovered;
+    instructionsCoverageReport.missed = instructionsMissed;
+    instructionsCoverageReport.percent = (0, calculatepercentage_1.calculatepercentage)(instructionsCovered, instructionsMissed + instructionsCovered);
+    return instructionsCoverageReport;
 }
 exports.calculateCoverage = calculateCoverage;
 
