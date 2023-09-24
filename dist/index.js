@@ -3004,45 +3004,70 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 482:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 982:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateCoverage = void 0;
-async function calculateCoverage(coverages) {
-    const results = [];
-    calculateInstructionsCoverage(coverages);
-    return new Promise((resolve, reject) => { });
-}
-exports.calculateCoverage = calculateCoverage;
-function calculateInstructionsCoverage(coverages) {
-    coverages.then(value => {
+const CalculatePercentage_1 = __nccwpck_require__(603);
+function calculateCoverage(coverages, coveragePropertyName) {
+    return coverages.then(value => {
         var instructionsCovered = 0;
         var instructionsMissed = 0;
-        var instructionsCount = 0;
         for (let c of value) {
             var cov = c;
-            instructionsMissed =
-                Number(instructionsMissed) + Number(cov.INSTRUCTION_MISSED);
-            instructionsCovered =
-                Number(instructionsCovered) + Number(cov.INSTRUCTION_COVERED);
-            console.log(cov.INSTRUCTION_MISSED);
-            console.log(cov.INSTRUCTION_COVERED);
+            let missedKey = (coveragePropertyName + '_MISSED');
+            let coveredKey = (coveragePropertyName + '_COVERED');
+            instructionsMissed = instructionsMissed + Number(cov[missedKey]);
+            instructionsCovered = instructionsCovered + Number(cov[coveredKey]);
         }
-        instructionsCount = instructionsMissed + instructionsCovered;
-        console.log('****************************************');
-        console.log(instructionsMissed);
-        console.log(instructionsCovered);
-        console.log(instructionsCount);
-        console.log(calculatePercentage(instructionsCovered, instructionsCount));
-        console.log('****************************************');
+        var instructionsCoverageReport = {};
+        instructionsCoverageReport.name = 'Instruction';
+        instructionsCoverageReport.count = instructionsMissed + instructionsCovered;
+        instructionsCoverageReport.covered = instructionsCovered;
+        instructionsCoverageReport.missed = instructionsMissed;
+        instructionsCoverageReport.percent = (0, CalculatePercentage_1.calculatePercentage)(instructionsCovered, instructionsMissed + instructionsCovered);
+        return instructionsCoverageReport;
     });
 }
+exports.calculateCoverage = calculateCoverage;
+
+
+/***/ }),
+
+/***/ 603:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.calculatePercentage = void 0;
 function calculatePercentage(amount, total) {
     return (amount / total) * 100;
 }
+exports.calculatePercentage = calculatePercentage;
+
+
+/***/ }),
+
+/***/ 482:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.calculateAllCoverages = void 0;
+const CalculateCoverageFor_1 = __nccwpck_require__(982);
+function calculateAllCoverages(coverages) {
+    (0, CalculateCoverageFor_1.calculateCoverage)(coverages, 'INSTRUCTION').then(value => {
+        console.log('***************************');
+        console.log(value);
+        console.log('***************************');
+    });
+}
+exports.calculateAllCoverages = calculateAllCoverages;
 
 
 /***/ }),
@@ -3089,7 +3114,7 @@ async function run() {
         const csvFilePath = core.getInput('path');
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
         const records = (0, readJacocoReport_1.readCSVFile)(csvFilePath);
-        (0, calculate_1.calculateCoverage)(records);
+        (0, calculate_1.calculateAllCoverages)(records);
     }
     catch (error) {
         // Fail the workflow run if an error occurs
