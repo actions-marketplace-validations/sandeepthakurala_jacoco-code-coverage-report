@@ -3063,11 +3063,11 @@ exports.calculateAllCoverages = void 0;
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(icoverages) {
     var coverages = [];
-    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION').then(value => {
-        coverages.push(value);
-    });
+    let val = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION');
     (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH').then(value => {
-        coverages.push(value);
+        console.log('******');
+        console.log(value);
+        return value;
     });
     (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE').then(value => {
         coverages.push(value);
@@ -3078,10 +3078,8 @@ function calculateAllCoverages(icoverages) {
     (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD').then(value => {
         coverages.push(value);
     });
-    for (let jacocoCoverage of coverages) {
-        console.log('*******************');
-        console.log(jacocoCoverage);
-    }
+    console.log('#####');
+    console.log(val);
 }
 exports.calculateAllCoverages = calculateAllCoverages;
 

@@ -4,12 +4,11 @@ import { IJacocoCoverageReport } from './IJacocoCoverageReport'
 export function calculateAllCoverages(icoverages: Promise<object[]>) {
   var coverages: Array<IJacocoCoverageReport> = []
 
-  calculateCoverage(icoverages, 'INSTRUCTION').then(value => {
-    coverages.push(value)
-  })
-
+  let val = calculateCoverage(icoverages, 'INSTRUCTION')
   calculateCoverage(icoverages, 'BRANCH').then(value => {
-    coverages.push(value)
+    console.log('******')
+    console.log(value)
+    return value
   })
 
   calculateCoverage(icoverages, 'LINE').then(value => {
@@ -24,8 +23,6 @@ export function calculateAllCoverages(icoverages: Promise<object[]>) {
     coverages.push(value)
   })
 
-  for (let jacocoCoverage of coverages) {
-    console.log('*******************')
-    console.log(jacocoCoverage)
-  }
+  console.log('#####')
+  console.log(val)
 }
