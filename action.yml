@@ -3,6 +3,9 @@ description:
   'This action reads jacoco coverage report and create output that can be used
   print in logs or teams notification'
 author: 'Sandeep Thakurala'
+branding:
+  color: 'blue'
+  icon: 'file-text'
 
 # Define your inputs here.
 inputs:
@@ -48,7 +51,3 @@ outputs:
 runs:
   using: node20
   main: dist/index.js
-
-branding:
-  color: blue
-  icon: file-text
