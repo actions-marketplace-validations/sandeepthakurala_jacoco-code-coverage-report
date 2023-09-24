@@ -29,9 +29,7 @@ export function calculateAllCoverages(icoverages: Promise<object[]>): void {
     core.setOutput('method_coverage', method.percent)
 
     const obj = await icoverages
-
     core.setOutput('class_count', obj.length)
-    console.log(obj.length)
   }
 
   setCoverageValuesToOutput()
