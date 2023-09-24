@@ -3045,7 +3045,8 @@ exports.calculateCoverage = calculateCoverage;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculatePercentage = void 0;
 function calculatePercentage(amount, total) {
-    return (amount / total) * 100;
+    var percentage = (amount / total) * 100;
+    return Number((Math.round(percentage * 100) / 100).toFixed(2));
 }
 exports.calculatePercentage = calculatePercentage;
 
@@ -3061,11 +3062,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateAllCoverages = void 0;
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(coverages) {
-    (0, CalculateCoverageFor_1.calculateCoverage)(coverages, 'INSTRUCTION').then(value => {
+    var instructionsCoverage = (0, CalculateCoverageFor_1.calculateCoverage)(coverages, 'INSTRUCTION').then(value => {
         console.log('***************************');
         console.log(value);
-        console.log('***************************');
+        return value;
     });
+    console.log(instructionsCoverage);
 }
 exports.calculateAllCoverages = calculateAllCoverages;
 
