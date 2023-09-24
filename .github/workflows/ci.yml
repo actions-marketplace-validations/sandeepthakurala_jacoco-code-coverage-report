@@ -68,4 +68,4 @@ jobs:
           echo "${{ steps.test-action.outputs.method_count }}"
           echo "${{ steps.test-action.outputs.method_covered }}"
           echo "${{ steps.test-action.outputs.method_coverage }}"
-          echo "${{ steps.test-action.outputs.class_cunt }}"
+          echo "${{ steps.test-action.outputs.class_count }}"
