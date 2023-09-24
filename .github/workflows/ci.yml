@@ -11,7 +11,7 @@ on:
 jobs:
   test-jacoco-report-parser:
     name: Jacoco Reprot Parse
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -43,7 +43,7 @@ jobs:
 
   test-action:
     name: GitHub Actions Test
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout

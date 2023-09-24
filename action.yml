@@ -1,53 +1,48 @@
-name: 'jacoco-code-coverage-report'
+name: jacoco-code-coverage-report
 description:
-  'This action reads jacoco coverage report and create output that can be used
-  print in logs or teams notification'
-author: 'Sandeep Thakurala'
+  This action reads jacoco coverage report and create output that can be used
+  print in logs or teams notification
+author: Sandeep Thakurala
 branding:
-  color: 'blue'
-  icon: 'file-text'
-
-# Define your inputs here.
+  color: blue
+  icon: file-text
 inputs:
   path:
-    description: 'Path of jacoco csv file.'
+    description: Path of jacoco csv file.
     required: true
-
-# Define your outputs here.
 outputs:
   class_count:
-    description: 'Count of classes check for coverage.'
+    description: Count of classes check for coverage.
   instruction_count:
-    description: 'Instructions count.'
+    description: Instructions count.
   instruction_covered:
-    description: 'Instructions covered.'
+    description: Instructions covered.
   instruction_coverage:
-    description: 'Percent of instructions covered.'
+    description: Percent of instructions covered.
   branch_count:
-    description: 'Branch count.'
+    description: Branch count.
   branch_covered:
-    description: 'Instructions covered.'
+    description: Instructions covered.
   branch_coverage:
-    description: 'Percent of branch covered.'
+    description: Percent of branch covered.
   lines_count:
-    description: 'Lines count.'
+    description: Lines count.
   lines_covered:
-    description: 'Lines covered.'
+    description: Lines covered.
   lines_coverage:
-    description: 'Percent of lines covered.'
+    description: Percent of lines covered.
   complexity_count:
-    description: 'Complexity count.'
+    description: Complexity count.
   complexity_covered:
-    description: 'Complexity covered.'
+    description: Complexity covered.
   complexity_coverage:
-    description: 'Percent of complexity covered.'
+    description: Percent of complexity covered.
   method_count:
-    description: 'Methods count.'
+    description: Methods count.
   method_covered:
-    description: 'Methods covered.'
+    description: Methods covered.
   method_coverage:
-    description: 'Percent of methods covered.'
-
+    description: Percent of methods covered.
 runs:
   using: node20
   main: dist/index.js
