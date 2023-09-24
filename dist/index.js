@@ -3062,7 +3062,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateAllCoverages = void 0;
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(icoverages) {
-    var coverages = {};
+    var coverages = [];
     (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION').then(value => {
         coverages.push(value);
     });

@@ -2,7 +2,7 @@ import { calculateCoverage } from './CalculateCoverageFor'
 import { IJacocoCoverageReport } from './IJacocoCoverageReport'
 
 export function calculateAllCoverages(icoverages: Promise<object[]>) {
-  var coverages = {} as IJacocoCoverageReport[]
+  var coverages: Array<IJacocoCoverageReport> = []
 
   calculateCoverage(icoverages, 'INSTRUCTION').then(value => {
     coverages.push(value)
