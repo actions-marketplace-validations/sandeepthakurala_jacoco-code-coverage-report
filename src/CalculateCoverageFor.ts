@@ -22,7 +22,7 @@ export function calculateCoverage(
     }
 
     var instructionsCoverageReport = {} as IJacocoCoverageReport
-    instructionsCoverageReport.name = 'Instruction'
+    instructionsCoverageReport.name = coveragePropertyName
     instructionsCoverageReport.count = instructionsMissed + instructionsCovered
     instructionsCoverageReport.covered = instructionsCovered
     instructionsCoverageReport.missed = instructionsMissed

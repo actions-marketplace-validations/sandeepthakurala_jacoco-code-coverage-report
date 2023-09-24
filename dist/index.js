@@ -3024,7 +3024,7 @@ function calculateCoverage(coverages, coveragePropertyName) {
             instructionsCovered = instructionsCovered + Number(cov[coveredKey]);
         }
         var instructionsCoverageReport = {};
-        instructionsCoverageReport.name = 'Instruction';
+        instructionsCoverageReport.name = coveragePropertyName;
         instructionsCoverageReport.count = instructionsMissed + instructionsCovered;
         instructionsCoverageReport.covered = instructionsCovered;
         instructionsCoverageReport.missed = instructionsMissed;
@@ -3054,22 +3054,49 @@ exports.calculatePercentage = calculatePercentage;
 /***/ }),
 
 /***/ 482:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.calculateAllCoverages = void 0;
+const core = __importStar(__nccwpck_require__(186));
 const CalculateCoverageFor_1 = __nccwpck_require__(982);
 function calculateAllCoverages(icoverages) {
     var coverages = [];
-    let instructCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION');
+    (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'INSTRUCTION').then(value => {
+        core.setOutput('instruction_count', value.count);
+        core.setOutput('instruction_covered', value.covered);
+        core.setOutput('instruction_coverage', value.percent);
+    });
     let branchCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'BRANCH');
     let lineCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'LINE');
     let complexityCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'COMPLEXITY');
     let methodCov = (0, CalculateCoverageFor_1.calculateCoverage)(icoverages, 'METHOD');
     const printValue = async () => {
-        coverages.push(await instructCov);
         coverages.push(await branchCov);
         coverages.push(await lineCov);
         coverages.push(await complexityCov);
@@ -3079,8 +3106,6 @@ function calculateAllCoverages(icoverages) {
             console.log(cov);
         }
     };
-    console.log('printValue*************printValue');
-    printValue();
 }
 exports.calculateAllCoverages = calculateAllCoverages;
 

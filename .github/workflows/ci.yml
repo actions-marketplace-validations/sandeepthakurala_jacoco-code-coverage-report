@@ -55,3 +55,10 @@ jobs:
         uses: ./
         with:
           path: target/site/jacoco/jacoco.csv
+
+      - name: Print Output
+        id: output
+        run: |
+          echo "${{ steps.test-action.outputs.instruction_count }}"
+          echo "${{ steps.test-action.outputs.instruction_covered }}"
+          echo "${{ steps.test-action.outputs.instruction_coverage }}"
