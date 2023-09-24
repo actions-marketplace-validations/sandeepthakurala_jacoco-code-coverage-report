@@ -129,7 +129,7 @@ tests.
 ## Usage
 
 ```yaml
-- uses: actions/jacoco-code-coverage-report
+- uses: actions/jacoco-code-coverage-report@v1
   with:
     path: path/to/jacoco.csv
 ```
