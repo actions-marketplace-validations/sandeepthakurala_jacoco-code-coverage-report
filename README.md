@@ -1,4 +1,4 @@
-# Jacoco Report Parser
+## Jacoco Report Parser
 
 This actions parse the jacoco code coverage CSV report and outputs the
 coverages.
